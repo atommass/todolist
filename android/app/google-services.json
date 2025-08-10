@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1002727750914",
+    "project_id": "simplenotes-e-ab-flutter-proj",
+    "storage_bucket": "simplenotes-e-ab-flutter-proj.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1002727750914:android:1eeac02aa3366a1d67161b",
+        "android_client_info": {
+          "package_name": "com.elgarsabolins.simplenotes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBd4ZjzoConI2Ulq-twu0WTKwjb-XY94QI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
