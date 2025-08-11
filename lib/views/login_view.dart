@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'dart:developer' as devtools show log;
-
 import 'package:simplenotes/constants/routes.dart';
+import 'package:simplenotes/utilities/show_error_dialog.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -63,8 +62,26 @@ class _LoginViewState extends State<LoginView> {
                 ).pushNamedAndRemoveUntil(notesRoute, (route) => false);
               } on FirebaseAuthException catch (e) {
                 if (e.code == 'invalid-credential') {
-                  devtools.log('Your email or password is incorrect!');
+                  await showErrorDialog(
+                    context,
+                    'Your email or password is incorrect',
+                  );
+                } else if (e.code == 'invalid-email') {
+                  await showErrorDialog(
+                    context,
+                    'Please check the formatting of your email.',
+                  );
+                } else {
+                  await showErrorDialog(
+                    context,
+                    'Error: ${e.toString()}',
+                  );
                 }
+              } catch (e) {
+                 await showErrorDialog(
+                    context,
+                    'Error: ${e.toString()}',
+                  );
               }
             },
             child: const Text('Login'),
@@ -82,3 +99,4 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 }
+
