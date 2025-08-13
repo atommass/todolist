@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:simplenotes/constants/routes.dart';
-import 'package:simplenotes/firebase_options.dart';
 import 'package:simplenotes/services/auth/auth_service.dart';
 import 'package:simplenotes/views/login_view.dart';
 import 'package:simplenotes/views/notes_view.dart';
@@ -26,6 +25,8 @@ void main() {
     ),
   );
 }
+
+// Home page
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -55,6 +56,8 @@ class HomePage extends StatelessWidget {
   }
 }
 
+void test() {
 
+}
 
 
