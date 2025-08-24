@@ -304,7 +304,7 @@ const userTable = 'user';
 
 const idColumn = 'id';
 const emailColumn = 'email';
-const userIdColumn = 'usser_id';
+const userIdColumn = 'user_id';
 const textColumn = 'text';
 const isSyncedWithCloudColumn = 'is_synced_with_cloud';
 
