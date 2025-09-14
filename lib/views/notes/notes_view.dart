@@ -52,6 +52,7 @@ class _NotesViewState extends State<NotesView> {
                 case MenuAction.logout:
                   final shouldLogout = await showLogOutDialog(context);
                   if (shouldLogout) {
+                    if (!mounted) return;
                     context.read<AuthBloc>().add(AuthEventLogOut());
                   }
               }
