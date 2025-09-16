@@ -17,30 +17,33 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
       appBar: AppBar(title: const Text('Verify email')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            const Text(
-              "We've sent you an email where you need to verify your email address. Please check your account!",
-            ),
-            const SizedBox(height: 16,),
-            const Text(
-              "If you haven't received a verification, check the spam folder and if necessary, press the button below!",
-            ),
-            TextButton(
-              onPressed: () {
-                context.read<AuthBloc>().add(
-                  const AuthEventSendEmailVerification(),
-                );
-              },
-              child: const Text('Send email verification'),
-            ),
-            TextButton(
-              onPressed: () async {
-                context.read<AuthBloc>().add(const AuthEventLogOut());
-              },
-              child: const Text('Restart'),
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const Text(
+                "We've sent you an email where you need to verify your email address. Please check your account!",
+              ),
+              const SizedBox(height: 16,),
+              const Text(
+                "If you haven't received a verification, check the spam folder and if necessary, press the button below!",
+              ),
+              const SizedBox(height: 72,),
+              TextButton(
+                onPressed: () {
+                  context.read<AuthBloc>().add(
+                    const AuthEventSendEmailVerification(),
+                  );
+                },
+                child: const Text('Resend email verification'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  context.read<AuthBloc>().add(const AuthEventLogOut());
+                },
+                child: const Text('Restart'),
+              ),
+            ],
+          ),
         ),
       ),
     );
