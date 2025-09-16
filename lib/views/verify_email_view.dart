@@ -20,8 +20,9 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
         child: Column(
           children: [
             const Text(
-              "We've sent you an email where you need to verify your email address. Please check your accoutn!",
+              "We've sent you an email where you need to verify your email address. Please check your account!",
             ),
+            const SizedBox(height: 16,),
             const Text(
               "If you haven't received a verification, check the spam folder and if necessary, press the button below!",
             ),
