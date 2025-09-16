@@ -49,9 +49,10 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
+            spacing: 24,
             children: [
               const Text(
-                'If you forgot your password, simply enter your email and we will send you a password reset link',
+                'If you forgot your password, simply enter your email and we will send you a password reset link.',
               ),
               TextField(
                 keyboardType: TextInputType.emailAddress,
@@ -62,7 +63,13 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                   hintText: 'Your email address',
                 ),
               ),
+              const SizedBox(height: 16),
               TextButton(
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all(Colors.black),
+                  foregroundColor: WidgetStateProperty.all(Colors.white),
+                  fixedSize: WidgetStateProperty.all(const Size.fromWidth(250)),
+                ),
                 onPressed: () {
                   final email = _controller.text;
                   context.read<AuthBloc>().add(AuthEventForgotPassword(email));

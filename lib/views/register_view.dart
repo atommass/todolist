@@ -53,31 +53,42 @@ class _RegisterViewState extends State<RegisterView> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 32,
             children: [
               const Text('Create your user profile'),
-              TextField(
-                controller: _email,
-                enableSuggestions: false,
-                autocorrect: false,
-                autofocus: true,
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(hintText: 'Enter your email'),
-              ),
-              TextField(
-                controller: _password,
-                obscureText: true,
-                enableSuggestions: false,
-                autocorrect: false,
-                decoration: const InputDecoration(
-                  hintText: 'Enter your password',
-                ),
+              Column(
+                children: [
+                  TextField(
+                    controller: _email,
+                    enableSuggestions: false,
+                    autocorrect: false,
+                    autofocus: true,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: const InputDecoration(hintText: 'Enter your email'),
+                  ),
+                  TextField(
+                    controller: _password,
+                    obscureText: true,
+                    enableSuggestions: false,
+                    autocorrect: false,
+                    decoration: const InputDecoration(
+                      hintText: 'Enter your password',
+                    ),
+                  ),
+                ],
               ),
               Center(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
+                  spacing: 16,
                   children: [
                     const SizedBox(height: 16,),
                     TextButton(
+                      style: ButtonStyle(
+                        backgroundColor: WidgetStateProperty.all(Colors.black),
+                        foregroundColor: WidgetStateProperty.all(Colors.white),
+                        fixedSize: WidgetStateProperty.all(const Size.fromWidth(150)),
+                      ),
                       onPressed: () async {
                         final email = _email.text;
                         final password = _password.text;
