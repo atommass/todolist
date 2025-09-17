@@ -12,11 +12,14 @@ import 'package:simplenotes/views/notes/forgot_password_view.dart';
 import 'package:simplenotes/views/notes/notes_view.dart';
 import 'package:simplenotes/views/register_view.dart';
 import 'package:simplenotes/views/verify_email_view.dart';
+import 'package:simplenotes/l10n/app_localizations.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MaterialApp(
+      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
