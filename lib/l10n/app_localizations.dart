@@ -101,8 +101,14 @@ abstract class AppLocalizations {
   /// No description provided for @my_title.
   ///
   /// In en, this message translates to:
-  /// **'My title goes here (ENG)'**
+  /// **'My title goes here'**
   String get my_title;
+
+  /// No description provided for @notes_title.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{You have no notes yet} =1{You have 1 note} other{You have {count} notes}}'**
+  String notes_title(int count);
 }
 
 class _AppLocalizationsDelegate

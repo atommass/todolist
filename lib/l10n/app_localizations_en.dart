@@ -9,5 +9,17 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get my_title => 'My title goes here (ENG)';
+  String get my_title => 'My title goes here';
+
+  @override
+  String notes_title(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'You have $count notes',
+      one: 'You have 1 note',
+      zero: 'You have no notes yet',
+    );
+    return '$_temp0';
+  }
 }
