@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:simplenotes/services/auth/auth_provider.dart';
-import 'package:simplenotes/services/auth/bloc/auth_event.dart';
-import 'package:simplenotes/services/auth/bloc/auth_state.dart';
+import 'package:todolist/services/auth/auth_provider.dart';
+import 'package:todolist/services/auth/bloc/auth_event.dart';
+import 'package:todolist/services/auth/bloc/auth_state.dart';
+
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc(AuthProvider provider)

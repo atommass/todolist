@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simplenotes/services/auth/bloc/auth_bloc.dart';
-import 'package:simplenotes/services/auth/bloc/auth_event.dart';
-import 'package:simplenotes/services/auth/bloc/auth_state.dart';
-import 'package:simplenotes/utilities/dialogs/error_dialog.dart';
-import 'package:simplenotes/utilities/dialogs/password_reset_email_sent_dialog.dart';
+import 'package:todolist/services/auth/bloc/auth_bloc.dart';
+import 'package:todolist/services/auth/bloc/auth_event.dart';
+import 'package:todolist/services/auth/bloc/auth_state.dart';
+import 'package:todolist/utilities/dialogs/error_dialog.dart';
+import 'package:todolist/utilities/dialogs/password_reset_email_sent_dialog.dart';
+
 
 class ForgotPasswordView extends StatefulWidget {
   const ForgotPasswordView({super.key});

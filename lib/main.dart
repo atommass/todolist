@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simplenotes/constants/routes.dart';
-import 'package:simplenotes/helpers/loading/loading_screen.dart';
-import 'package:simplenotes/services/auth/bloc/auth_bloc.dart';
-import 'package:simplenotes/services/auth/bloc/auth_event.dart';
-import 'package:simplenotes/services/auth/bloc/auth_state.dart';
-import 'package:simplenotes/services/auth/firebase_auth_provider.dart';
-import 'package:simplenotes/views/login_view.dart';
-import 'package:simplenotes/views/notes/create_update_note_view.dart';
-import 'package:simplenotes/views/notes/forgot_password_view.dart';
-import 'package:simplenotes/views/notes/notes_view.dart';
-import 'package:simplenotes/views/register_view.dart';
-import 'package:simplenotes/views/verify_email_view.dart';
-import 'package:simplenotes/l10n/app_localizations.dart';
+import 'package:todolist/constants/routes.dart';
+import 'package:todolist/helpers/loading/loading_screen.dart';
+import 'package:todolist/l10n/app_localizations.dart';
+import 'package:todolist/services/auth/bloc/auth_bloc.dart';
+import 'package:todolist/services/auth/bloc/auth_event.dart';
+import 'package:todolist/services/auth/bloc/auth_state.dart';
+import 'package:todolist/services/auth/firebase_auth_provider.dart';
+import 'package:todolist/views/login_view.dart';
+import 'package:todolist/views/notes/create_update_note_view.dart';
+import 'package:todolist/views/notes/forgot_password_view.dart';
+import 'package:todolist/views/notes/notes_view.dart';
+import 'package:todolist/views/register_view.dart';
+import 'package:todolist/views/verify_email_view.dart';
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

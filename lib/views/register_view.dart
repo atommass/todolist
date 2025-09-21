@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simplenotes/services/auth/auth_exceptions.dart';
-import 'package:simplenotes/services/auth/bloc/auth_bloc.dart';
-import 'package:simplenotes/services/auth/bloc/auth_event.dart';
-import 'package:simplenotes/services/auth/bloc/auth_state.dart';
-import 'package:simplenotes/utilities/dialogs/error_dialog.dart';
+import 'package:todolist/services/auth/auth_exceptions.dart';
+import 'package:todolist/services/auth/bloc/auth_bloc.dart';
+import 'package:todolist/services/auth/bloc/auth_event.dart';
+import 'package:todolist/services/auth/bloc/auth_state.dart';
+import 'package:todolist/utilities/dialogs/error_dialog.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});

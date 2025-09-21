@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:simplenotes/utilities/dialogs/generic_dialog.dart';
+import 'package:todolist/utilities/dialogs/generic_dialog.dart';
 
 Future<void> showPasswordResetDialog(BuildContext context) {
   return showGenericDialog(

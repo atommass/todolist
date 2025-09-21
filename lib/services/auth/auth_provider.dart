@@ -1,4 +1,5 @@
-import 'package:simplenotes/services/auth/auth_user.dart';
+
+import 'package:todolist/services/auth/auth_user.dart';
 
 abstract class AuthProvider {
   Future<void> initialize();
