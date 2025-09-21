@@ -8,9 +8,9 @@ import 'package:todolist/services/auth/bloc/auth_event.dart';
 import 'package:todolist/services/auth/bloc/auth_state.dart';
 import 'package:todolist/services/auth/firebase_auth_provider.dart';
 import 'package:todolist/views/login_view.dart';
-import 'package:todolist/views/notes/create_update_note_view.dart';
-import 'package:todolist/views/notes/forgot_password_view.dart';
-import 'package:todolist/views/notes/notes_view.dart';
+import 'package:todolist/views/todolist/create_update_todo_view.dart';
+import 'package:todolist/views/todolist/forgot_password_view.dart';
+import 'package:todolist/views/todolist/todolist_view.dart';
 import 'package:todolist/views/register_view.dart';
 import 'package:todolist/views/verify_email_view.dart';
 
@@ -30,7 +30,7 @@ void main() {
         child: const HomePage(),
       ),
       routes: {
-        createUpdateNoteRoute: (context) => const CreateUpdateNoteView(),
+        createUpdateTaskRoute: (context) => const CreateUpdateTaskView(),
       },
     ),
   );
@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is AuthStateLoggedIn) {
-          return const NotesView();
+          return const TaskView();
         } else if (state is AuthStateNeedsVerification) {
           return const VerifyEmailView();
         } else if (state is AuthStateLoggedOut) {

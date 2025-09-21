@@ -1,4 +1,4 @@
-package com.elgarsabolins.simplenotes
+package com.elgarsabolins.todolist
 
 import io.flutter.embedding.android.FlutterActivity
 

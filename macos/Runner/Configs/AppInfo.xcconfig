@@ -8,7 +8,7 @@
 PRODUCT_NAME = simplenotes
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.elgarsabolins.simplenotes
+PRODUCT_BUNDLE_IDENTIFIER = com.elgarsabolins.todolist
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2025 com.elgarsabolins. All rights reserved.

@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/services/cloud/cloud_note.dart';
+import 'package:todolist/services/cloud/cloud_task.dart';
 import 'package:todolist/utilities/dialogs/delete_dialog.dart';
 
 
-typedef NoteCallback = void Function(CloudNote note);
+typedef TaskCallback = void Function(CloudTask task);
 
-class NotesListView extends StatelessWidget {
-  final Iterable<CloudNote> notes;
-  final NoteCallback onDeleteNote;
-  final NoteCallback onTap;
+class TaskListView extends StatelessWidget {
+  final Iterable<CloudTask> tasks;
+  final TaskCallback onDeleteTask;
+  final TaskCallback onTap;
 
-  const NotesListView({
+  const TaskListView({
     super.key,
-    required this.notes,
-    required this.onDeleteNote, 
+    required this.tasks,
+    required this.onDeleteTask, 
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: notes.length,
+      itemCount: tasks.length,
       itemBuilder: (context, index) {
-        final note = notes.elementAt(index);
+        final task = tasks.elementAt(index);
         return ListTile(
           onTap: () {
-            onTap(note);
+            onTap(task);
           },
           title: Text(
-            note.text,
+            task.text,
             maxLines: 1,
             softWrap: true,
             overflow: TextOverflow.ellipsis,
@@ -37,7 +37,7 @@ class NotesListView extends StatelessWidget {
             onPressed: () async {
               final shouldDelete = await showDeleteDialog(context);
               if (shouldDelete) {
-                onDeleteNote(note);
+                onDeleteTask(task);
               }
             },
             icon: Icon(Icons.delete)),

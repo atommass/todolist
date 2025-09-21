@@ -1,1 +1,1 @@
-const createUpdateNoteRoute = '/notes/new-note/';
+const createUpdateTaskRoute = '/todos/new-todo/';

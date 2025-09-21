@@ -1,49 +1,53 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:todolist/services/cloud/cloud_note.dart';
+import 'package:todolist/services/cloud/cloud_task.dart';
 import 'package:todolist/services/cloud/cloud_storage_constants.dart';
 import 'package:todolist/services/cloud/cloud_storage_exceptions.dart';
 
 
 class FirebaseCloudStorage {
-  final notes = FirebaseFirestore.instance.collection('notes');
+  final todoItem = FirebaseFirestore.instance.collection('todolist');
 
-  Future<void> deleteNote({required String documentId}) async {
+  Future<void> deleteTask({required String documentId}) async {
     try {
-      await notes.doc(documentId).delete();
+      await todoItem.doc(documentId).delete();
     } catch (e) {
-      throw CouldNotDeleteNoteException();
+      throw CouldNotDeleteTaskException();
     }
   }
 
-  Future<void> updateNote({
+  Future<void> updateTask({
     required String documentId,
     required String text,
   }) async {
     try {
-      await notes.doc(documentId).update({textFieldName: text});
+      await todoItem.doc(documentId).update({textFieldName: text});
     } catch (e) {
-      throw CouldNotUpdateNoteException();
+      throw CouldNotUpdateTaskException();
     }
   }
 
-  Stream<Iterable<CloudNote>> allNotes({required String ownerUserId}) {
-    final allNotes = notes
+  Stream<Iterable<CloudTask>> allTasks({required String ownerUserId}) {
+    final todosCollection = todoItem
         .where(ownerUserIdFieldName, isEqualTo: ownerUserId)
         .snapshots()
-        .map((event) => event.docs.map((doc) => CloudNote.fromSnapshot(doc)));
-    return allNotes;
+        .map((event) => event.docs.map((doc) => CloudTask.fromSnapshot(doc)));
+    return todosCollection;
   }
 
-  Future<CloudNote> createNewNote({required String ownerUserId}) async {
-    final document = await notes.add({
+  Future<CloudTask> createNewTask({required String ownerUserId}) async {
+    final document = await todoItem.add({
       ownerUserIdFieldName: ownerUserId,
       textFieldName: '',
     });
-    final fetchedNote = await document.get();
-    return CloudNote(
-      documentId: fetchedNote.id,
+    final fetchedTask = await document.get();
+    return CloudTask(
+      documentId: fetchedTask.id,
       ownerUserId: ownerUserId,
       text: '',
+      isDone: false,
+      lastUpdated: DateTime.now(),
+      deadline: DateTime.now().add(const Duration(days: 7)),
+      priority: 0,
     );
   }
 

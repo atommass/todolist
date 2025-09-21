@@ -3,14 +3,12 @@ class CloudStorageException implements Exception{
 }
 
 // C
-class CouldNotCreateNoteException extends CloudStorageException {}
+class CouldNotCreateTaskException extends CloudStorageException {}
 
-// R
-class CouldNotGetAllNotesException extends CloudStorageException {}
 
 // U
-class CouldNotUpdateNoteException extends CloudStorageException {}
+class CouldNotUpdateTaskException extends CloudStorageException {}
 
 // D
-class CouldNotDeleteNoteException extends CloudStorageException {}
+class CouldNotDeleteTaskException extends CloudStorageException {}
 

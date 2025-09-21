@@ -1,38 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:todolist/services/auth/auth_service.dart';
-import 'package:todolist/services/cloud/cloud_note.dart';
+import 'package:todolist/services/cloud/cloud_task.dart';
 import 'package:todolist/services/cloud/firebase_cloud_storage.dart';
-import 'package:todolist/utilities/dialogs/cannot_share_empty_note_dialog.dart';
+import 'package:todolist/utilities/dialogs/cannot_share_empty_todoitem_dialog.dart';
 import 'package:todolist/utilities/generics/get_arguments.dart';
 
 
-class CreateUpdateNoteView extends StatefulWidget {
-  const CreateUpdateNoteView({super.key});
+class CreateUpdateTaskView extends StatefulWidget {
+  const CreateUpdateTaskView({super.key});
 
   @override
-  State<CreateUpdateNoteView> createState() => _CreateUpdateNoteViewState();
+  State<CreateUpdateTaskView> createState() => _CreateUpdateTaskViewState();
 }
 
-class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
-  CloudNote? _note;
-  late final FirebaseCloudStorage _notesService;
+class _CreateUpdateTaskViewState extends State<CreateUpdateTaskView> {
+  CloudTask? _task;
+  late final FirebaseCloudStorage _taskService;
   late final TextEditingController _textController;
 
   @override
   void initState() {
-    _notesService = FirebaseCloudStorage();
+    _taskService = FirebaseCloudStorage();
     _textController = TextEditingController();
     super.initState();
   }
 
   void _textControllerListener() async {
-    final note = _note;
-    if (note == null) {
+    final task = _task;
+    if (task == null) {
       return;
     }
     final text = _textController.text;
-    await _notesService.updateNote(documentId: note.documentId, text: text);
+    await _taskService.updateTask(documentId: task.documentId, text: text);
   }
 
   void setuptextControllerListener() {
@@ -40,45 +40,45 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
     _textController.addListener(_textControllerListener);
   }
 
-  Future<CloudNote> createOrGetExistingNote(BuildContext context) async {
-    final widgetNote = context.getArgument<CloudNote>();
+  Future<CloudTask> createOrGetExistingTask(BuildContext context) async {
+    final widgetTask = context.getArgument<CloudTask>();
 
-    if (widgetNote != null) {
-      _note = widgetNote;
-      _textController.text = widgetNote.text;
-      return widgetNote;
+    if (widgetTask != null) {
+      _task = widgetTask;
+      _textController.text = widgetTask.text;
+      return widgetTask;
     }
 
-    final existingNote = _note;
-    if (existingNote != null) {
-      return existingNote;
+    final existingTask = _task;
+    if (existingTask != null) {
+      return existingTask;
     }
     final currentUser = AuthService.firebase().currentUser!;
     final userId = currentUser.id;
-    final newNote = await _notesService.createNewNote(ownerUserId: userId);
-    _note = newNote;
-    return newNote;
+    final newTask = await _taskService.createNewTask(ownerUserId: userId);
+    _task = newTask;
+    return newTask;
   }
 
-  void _deleteNoteIfTextIsEmpty() {
-    final note = _note;
-    if (_textController.text.isEmpty && note != null) {
-      _notesService.deleteNote(documentId: note.documentId);
+  void _deleteTaskIfTextIsEmpty() {
+    final item = _task;
+    if (_textController.text.isEmpty && item != null) {
+      _taskService.deleteTask(documentId: item.documentId);
     }
   }
 
-  void _saveNoteIfNoteEmpty() async {
-    final note = _note;
+  void _saveTaskIfTaskEmpty() async {
+    final item = _task;
     final text = _textController.text;
-    if (note != null && text.isNotEmpty) {
-      await _notesService.updateNote(documentId: note.documentId, text: text);
+    if (item != null && text.isNotEmpty) {
+      await _taskService.updateTask(documentId: item.documentId, text: text);
     }
   }
 
   @override
   void dispose() {
-    _deleteNoteIfTextIsEmpty();
-    _saveNoteIfNoteEmpty();
+    _deleteTaskIfTextIsEmpty();
+    _saveTaskIfTaskEmpty();
     _textController.dispose();
     super.dispose();
   }
@@ -87,13 +87,13 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Note'),
+        title: const Text('Task'),
         actions: [
           IconButton(
             onPressed: () async {
               final text = _textController.text;
-              if (_note == null || text.isEmpty) {
-                await showCannotShareEmptyNoteDialog(context);
+              if (_task == null || text.isEmpty) {
+                await showCannotShareEmptyToDoItemDialog(context);
               }
               SharePlus.instance.share(
                 ShareParams(text: text)
@@ -103,7 +103,7 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
           ],
       ),
       body: FutureBuilder(
-        future: createOrGetExistingNote(context),
+        future: createOrGetExistingTask(context),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
@@ -116,12 +116,12 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
                     keyboardType: TextInputType.multiline,
                     maxLines: null,
                     decoration: const InputDecoration(
-                      hintText: 'Start typing your note...',
+                      hintText: 'Create your to-do item...',
                     ),
                   ),
                 );
               } else {
-                return const Center(child: Text('Failed to create note.'));
+                return const Center(child: Text('Failed to create to-do item.'));
               }
             default:
               return const CircularProgressIndicator();

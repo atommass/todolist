@@ -41,48 +41,49 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyD6iZ0nMhCqH0EuuWqqGhtFe-UquaZozDw',
-    appId: '1:1002727750914:web:8d590682da3f04d667161b',
-    messagingSenderId: '1002727750914',
-    projectId: 'simplenotes-e-ab-flutter-proj',
-    authDomain: 'simplenotes-e-ab-flutter-proj.firebaseapp.com',
-    storageBucket: 'simplenotes-e-ab-flutter-proj.firebasestorage.app',
-    measurementId: 'G-LTEVZZ7JYS',
+    apiKey: 'AIzaSyAEY7TwOK55LNh1q3gRfcnBgTgkETbxm7g',
+    appId: '1:560379676148:web:b58bb1166012bb6735e5a1',
+    messagingSenderId: '560379676148',
+    projectId: 'todolist-flutter-e-ab',
+    authDomain: 'todolist-flutter-e-ab.firebaseapp.com',
+    storageBucket: 'todolist-flutter-e-ab.firebasestorage.app',
+    measurementId: 'G-DVGB502WGW',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBd4ZjzoConI2Ulq-twu0WTKwjb-XY94QI',
-    appId: '1:1002727750914:android:1eeac02aa3366a1d67161b',
-    messagingSenderId: '1002727750914',
-    projectId: 'simplenotes-e-ab-flutter-proj',
-    storageBucket: 'simplenotes-e-ab-flutter-proj.firebasestorage.app',
+    apiKey: 'AIzaSyAR3sN-tK4PnYXhkA0rktgU1NBUq4-YkXg',
+    appId: '1:560379676148:android:1c8216217c09064235e5a1',
+    messagingSenderId: '560379676148',
+    projectId: 'todolist-flutter-e-ab',
+    storageBucket: 'todolist-flutter-e-ab.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCs6xmWrIKAQWx5o9M0F1Q7QYvoMKyWXm0',
-    appId: '1:1002727750914:ios:96b7efc7cd5da69b67161b',
-    messagingSenderId: '1002727750914',
-    projectId: 'simplenotes-e-ab-flutter-proj',
-    storageBucket: 'simplenotes-e-ab-flutter-proj.firebasestorage.app',
-    iosBundleId: 'com.elgarsabolins.simplenotes',
+    apiKey: 'AIzaSyBGSfRBrty9HL0VAjwtaUTa17tTbvQRFro',
+    appId: '1:560379676148:ios:8e3ba785c1f0b14435e5a1',
+    messagingSenderId: '560379676148',
+    projectId: 'todolist-flutter-e-ab',
+    storageBucket: 'todolist-flutter-e-ab.firebasestorage.app',
+    iosBundleId: 'com.elgarsabolins.todolist',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCs6xmWrIKAQWx5o9M0F1Q7QYvoMKyWXm0',
-    appId: '1:1002727750914:ios:96b7efc7cd5da69b67161b',
-    messagingSenderId: '1002727750914',
-    projectId: 'simplenotes-e-ab-flutter-proj',
-    storageBucket: 'simplenotes-e-ab-flutter-proj.firebasestorage.app',
-    iosBundleId: 'com.elgarsabolins.simplenotes',
+    apiKey: 'AIzaSyBGSfRBrty9HL0VAjwtaUTa17tTbvQRFro',
+    appId: '1:560379676148:ios:8e3ba785c1f0b14435e5a1',
+    messagingSenderId: '560379676148',
+    projectId: 'todolist-flutter-e-ab',
+    storageBucket: 'todolist-flutter-e-ab.firebasestorage.app',
+    iosBundleId: 'com.elgarsabolins.todolist',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyD6iZ0nMhCqH0EuuWqqGhtFe-UquaZozDw',
-    appId: '1:1002727750914:web:91a852ce1e1bc14067161b',
-    messagingSenderId: '1002727750914',
-    projectId: 'simplenotes-e-ab-flutter-proj',
-    authDomain: 'simplenotes-e-ab-flutter-proj.firebaseapp.com',
-    storageBucket: 'simplenotes-e-ab-flutter-proj.firebasestorage.app',
-    measurementId: 'G-XKTSZQX38R',
+    apiKey: 'AIzaSyAEY7TwOK55LNh1q3gRfcnBgTgkETbxm7g',
+    appId: '1:560379676148:web:e22ecebc99c5e4cf35e5a1',
+    messagingSenderId: '560379676148',
+    projectId: 'todolist-flutter-e-ab',
+    authDomain: 'todolist-flutter-e-ab.firebaseapp.com',
+    storageBucket: 'todolist-flutter-e-ab.firebasestorage.app',
+    measurementId: 'G-JS03J38KKF',
   );
+
 }

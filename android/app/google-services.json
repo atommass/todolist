@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "1002727750914",
-    "project_id": "simplenotes-e-ab-flutter-proj",
-    "storage_bucket": "simplenotes-e-ab-flutter-proj.firebasestorage.app"
+    "project_number": "560379676148",
+    "project_id": "todolist-flutter-e-ab",
+    "storage_bucket": "todolist-flutter-e-ab.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1002727750914:android:1eeac02aa3366a1d67161b",
+        "mobilesdk_app_id": "1:560379676148:android:1c8216217c09064235e5a1",
         "android_client_info": {
-          "package_name": "com.elgarsabolins.simplenotes"
+          "package_name": "com.elgarsabolins.todolist"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBd4ZjzoConI2Ulq-twu0WTKwjb-XY94QI"
+          "current_key": "AIzaSyAR3sN-tK4PnYXhkA0rktgU1NBUq4-YkXg"
         }
       ],
       "services": {

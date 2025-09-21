@@ -6,50 +6,44 @@ import 'package:todolist/extensions/buildcontext/loc.dart';
 import 'package:todolist/services/auth/auth_service.dart';
 import 'package:todolist/services/auth/bloc/auth_bloc.dart';
 import 'package:todolist/services/auth/bloc/auth_event.dart';
-import 'package:todolist/services/cloud/cloud_note.dart';
+import 'package:todolist/services/cloud/cloud_task.dart';
 import 'package:todolist/services/cloud/firebase_cloud_storage.dart';
 import 'package:todolist/utilities/dialogs/logout_dialog.dart';
-import 'package:todolist/views/notes/notes_list_view.dart';
+import 'package:todolist/views/todolist/todo_list_view.dart';
 
 
 extension Count<T extends Iterable> on Stream<T> {
   Stream<int> get getLength => map((event) => event.length);
 }
 
-class NotesView extends StatefulWidget {
-  const NotesView({super.key});
+class TaskView extends StatefulWidget {
+  const TaskView({super.key});
 
   @override
-  State<NotesView> createState() => _NotesViewState();
+  State<TaskView> createState() => _TaskViewState();
 }
 
-class _NotesViewState extends State<NotesView> {
-  late final FirebaseCloudStorage _notesService;
+class _TaskViewState extends State<TaskView> {
+  late final FirebaseCloudStorage _taskService;
 
   String get userId => AuthService.firebase().currentUser!.id;
 
   @override
   void initState() {
-    _notesService = FirebaseCloudStorage();
+    _taskService = FirebaseCloudStorage();
     super.initState();
   }
-
-  // @override
-  // void dispose() {
-  //   _notesService.close();
-  //   super.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: StreamBuilder(
-          stream: _notesService.allNotes(ownerUserId: userId).getLength,
+          stream: _taskService.allTasks(ownerUserId: userId).getLength,
           builder: (context, AsyncSnapshot<int> snapshot) {
             if (snapshot.hasData) {
-              final noteCount = snapshot.data ?? 0;
-              final text = context.loc.notes_title(noteCount);
+              final itemCount = snapshot.data ?? 0;
+              final text = context.loc.notes_title(itemCount);
               return Text(text);
             } else {
               return const Text('Loading...');
@@ -59,7 +53,7 @@ class _NotesViewState extends State<NotesView> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(createUpdateNoteRoute);
+              Navigator.of(context).pushNamed(createUpdateTaskRoute);
             },
             icon: const Icon(Icons.add),
           ),
@@ -86,22 +80,22 @@ class _NotesViewState extends State<NotesView> {
         ],
       ),
       body: StreamBuilder(
-        stream: _notesService.allNotes(ownerUserId: userId),
+        stream: _taskService.allTasks(ownerUserId: userId),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
             case ConnectionState.active:
               if (snapshot.hasData) {
-                final allNotes = snapshot.data as Iterable<CloudNote>;
-                return NotesListView(
-                  notes: allNotes,
-                  onDeleteNote: (note) async {
-                    await _notesService.deleteNote(documentId: note.documentId);
+                final allTasks = snapshot.data as Iterable<CloudTask>;
+                return TaskListView(
+                  tasks: allTasks,
+                  onDeleteTask: (task) async {
+                    await _taskService.deleteTask(documentId: task.documentId);
                   },
-                  onTap: (note) {
+                  onTap: (task) {
                     Navigator.of(
                       context,
-                    ).pushNamed(createUpdateNoteRoute, arguments: note);
+                    ).pushNamed(createUpdateTaskRoute, arguments: task);
                   },
                 );
               } else {
