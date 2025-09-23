@@ -26,6 +26,44 @@ class FirebaseCloudStorage {
     }
   }
 
+  Future<void> setOrUpdateTaskDeadline({
+    required String documentId,
+    required DateTime deadline,
+  }) async {
+    try {
+      await todoItem.doc(documentId).update({deadlineFieldName: deadline});
+    } catch (e) {
+      throw CouldNotUpdateTaskException();
+    }
+  }
+
+  Future<void> markTaskAsDone(String documentId) async {
+    try {
+      await todoItem.doc(documentId).update({isDoneFieldName: true});
+    } catch (e) {
+      throw CouldNotUpdateTaskException();
+    }
+  }
+
+  /// Set the task's done state to [isDone].
+  Future<void> setTaskDone({
+    required String documentId,
+    required bool isDone,
+  }) async {
+    try {
+      await todoItem.doc(documentId).update({isDoneFieldName: isDone});
+    } catch (e) {
+      throw CouldNotUpdateTaskException();
+    }
+  }
+
+  Future<void> updateTaskDeadline({
+    required String documentId,
+    required DateTime deadline,
+  }) async {
+    return setOrUpdateTaskDeadline(documentId: documentId, deadline: deadline);
+  }
+
   Stream<Iterable<CloudTask>> allTasks({required String ownerUserId}) {
     final todosCollection = todoItem
         .where(ownerUserIdFieldName, isEqualTo: ownerUserId)
@@ -35,9 +73,15 @@ class FirebaseCloudStorage {
   }
 
   Future<CloudTask> createNewTask({required String ownerUserId}) async {
+    final now = DateTime.now();
+    final defaultDeadline = now.add(const Duration(days: 7));
     final document = await todoItem.add({
       ownerUserIdFieldName: ownerUserId,
       textFieldName: '',
+      isDoneFieldName: false,
+      lastUpdatedFieldName: now,
+      deadlineFieldName: defaultDeadline,
+      priorityFieldName: 0,
     });
     final fetchedTask = await document.get();
     return CloudTask(

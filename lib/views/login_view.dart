@@ -61,7 +61,7 @@ class _LoginViewState extends State<LoginView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 32,
               children: [
-                const Text('Please log in to your account to see your notes!'),
+                const Text('Please log in to your account to see your tasks!'),
                 Column(
                   children: [
                     TextField(

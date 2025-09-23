@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.elgarsabolins" "\0"
-            VALUE "FileDescription", "simplenotes" "\0"
+            VALUE "FileDescription", "todolist" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "simplenotes" "\0"
+            VALUE "InternalName", "todolist" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2025 com.elgarsabolins. All rights reserved." "\0"
-            VALUE "OriginalFilename", "simplenotes.exe" "\0"
-            VALUE "ProductName", "simplenotes" "\0"
+            VALUE "OriginalFilename", "todolist.exe" "\0"
+            VALUE "ProductName", "todolist" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

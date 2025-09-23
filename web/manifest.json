@@ -1,6 +1,6 @@
 {
-    "name": "simplenotes",
-    "short_name": "simplenotes",
+    "name": "todolist",
+    "short_name": "todolist",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

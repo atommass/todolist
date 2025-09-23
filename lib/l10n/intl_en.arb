@@ -1,11 +1,11 @@
 {
-    "my_title": "My title goes here",
-    "notes_title": "{count, plural, =0{You have no notes yet} =1{You have 1 note} other{You have {count} notes}}",
-    "@notes_title": {
+    "my_title": "Login",
+    "task_title": "{count, plural, =0{You have no tasks yet} =1{You have 1 task} other{You have {count} tasks}}",
+    "@task_title": {
         "placeholders": {
             "count": {
                 "type": "int",
-                "example": "You have 3 notes"
+                "example": "You have 3 tasks"
             }
         }
     }

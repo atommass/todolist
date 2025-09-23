@@ -9,16 +9,16 @@ class AppLocalizationsLv extends AppLocalizations {
   AppLocalizationsLv([String locale = 'lv']) : super(locale);
 
   @override
-  String get my_title => 'My title goes here';
+  String get my_title => 'Ielogojies';
 
   @override
-  String notes_title(int count) {
+  String task_title(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Tev ir $count ieraksti',
-      one: 'Tev ir 1 ieraksts',
-      zero: 'Tev nav ierakstu',
+      other: 'Tev ir $count uzdevumi',
+      one: 'Tev ir 1 uzdevums',
+      zero: 'Tev nav uzdevumu',
     );
     return '$_temp0';
   }

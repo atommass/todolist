@@ -43,7 +43,7 @@ class _TaskViewState extends State<TaskView> {
           builder: (context, AsyncSnapshot<int> snapshot) {
             if (snapshot.hasData) {
               final itemCount = snapshot.data ?? 0;
-              final text = context.loc.notes_title(itemCount);
+              final text = context.loc.task_title(itemCount);
               return Text(text);
             } else {
               return const Text('Loading...');
@@ -96,6 +96,14 @@ class _TaskViewState extends State<TaskView> {
                     Navigator.of(
                       context,
                     ).pushNamed(createUpdateTaskRoute, arguments: task);
+                  },
+                  onToggleDone: (task) async {
+                    // Toggle the isDone state
+                    final newState = !task.isDone;
+                    await _taskService.setTaskDone(
+                      documentId: task.documentId,
+                      isDone: newState,
+                    );
                   },
                 );
               } else {

@@ -1,11 +1,11 @@
 {
-    "my_title": "My title goes here",
-    "notes_title": "{count, plural, =0{Tev nav ierakstu} =1{Tev ir 1 ieraksts} other{Tev ir {count} ieraksti}}",
-    "@notes_title": {
+    "my_title": "Ielogojies",
+    "task_title": "{count, plural, =0{Tev nav uzdevumu} =1{Tev ir 1 uzdevums} other{Tev ir {count} uzdevumi}}",
+    "@task_title": {
         "placeholders": {
             "count": {
                 "type": "int",
-                "example": "Tev ir 3 ieraksti"
+                "example": "Tev ir 3 uzdevumi"
             }
         }
     }

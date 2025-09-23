@@ -4,17 +4,20 @@ import 'package:todolist/utilities/dialogs/delete_dialog.dart';
 
 
 typedef TaskCallback = void Function(CloudTask task);
+typedef ToggleTaskCallback = Future<void> Function(CloudTask task);
 
 class TaskListView extends StatelessWidget {
   final Iterable<CloudTask> tasks;
   final TaskCallback onDeleteTask;
   final TaskCallback onTap;
+  final ToggleTaskCallback? onToggleDone;
 
   const TaskListView({
     super.key,
     required this.tasks,
     required this.onDeleteTask, 
     required this.onTap,
+    this.onToggleDone,
   });
 
   @override
@@ -27,6 +30,16 @@ class TaskListView extends StatelessWidget {
           onTap: () {
             onTap(task);
           },
+          leading: GestureDetector(
+            onTap: () async {
+              if (onToggleDone != null) {
+                await onToggleDone!(task);
+              }
+            },
+            child: Icon(
+              task.isDone ? Icons.check_box : Icons.check_box_outline_blank,
+            ),
+          ),
           title: Text(
             task.text,
             maxLines: 1,
