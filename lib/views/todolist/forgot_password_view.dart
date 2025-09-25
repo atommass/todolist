@@ -6,7 +6,6 @@ import 'package:todolist/services/auth/bloc/auth_state.dart';
 import 'package:todolist/utilities/dialogs/error_dialog.dart';
 import 'package:todolist/utilities/dialogs/password_reset_email_sent_dialog.dart';
 
-
 class ForgotPasswordView extends StatefulWidget {
   const ForgotPasswordView({super.key});
 
@@ -39,9 +38,9 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
           }
           if (state.exception != null) {
             await showErrorDialog(
-              context,
               'We could not process your request!',
             );
+          
           }
         }
       },
@@ -70,11 +69,15 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                   style: ButtonStyle(
                     backgroundColor: WidgetStateProperty.all(Colors.black),
                     foregroundColor: WidgetStateProperty.all(Colors.white),
-                    fixedSize: WidgetStateProperty.all(const Size.fromWidth(250)),
+                    fixedSize: WidgetStateProperty.all(
+                      const Size.fromWidth(250),
+                    ),
                   ),
                   onPressed: () {
                     final email = _controller.text;
-                    context.read<AuthBloc>().add(AuthEventForgotPassword(email));
+                    context.read<AuthBloc>().add(
+                      AuthEventForgotPassword(email),
+                    );
                   },
                   child: const Text('Send me password reset link'),
                 ),

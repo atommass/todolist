@@ -63,7 +63,6 @@ class _TaskViewState extends State<TaskView> {
                 case MenuAction.logout:
                   final shouldLogout = await showLogOutDialog(context);
                   if (shouldLogout) {
-                    if (!mounted) return;
                     context.read<AuthBloc>().add(AuthEventLogOut());
                   }
               }

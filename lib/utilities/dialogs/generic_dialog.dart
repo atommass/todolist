@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:todolist/main.dart';
 
 typedef DialogOptionBuilder<T> = Map<String, T?> Function();
 
 Future<T?> showGenericDialog<T>({
-  required BuildContext context,
   required String title,
   required String content,
   required DialogOptionBuilder optionsBuilder,
 }) {
   final options = optionsBuilder();
   return showDialog(
-    context: context,
+    context: navigatorKey.currentContext!,
     builder: (context) {
       return AlertDialog(
         title: Text(title),
@@ -19,11 +19,7 @@ Future<T?> showGenericDialog<T>({
           final value = options[optionTitle];
           return TextButton(
             onPressed: () {
-              if (value != null) {
-                Navigator.of(context).pop(value);
-              } else {
-                Navigator.of(context).pop();
-              }
+              Navigator.of(context).pop(value);
             }, 
             child: Text(optionTitle));
         }).toList(),

@@ -39,16 +39,14 @@ class _LoginViewState extends State<LoginView> {
         if (state is AuthStateLoggedOut) {
           if (state.exception is UserNotFoundAuthException) {
             await showErrorDialog(
-              context,
               'Your email or password is incorrect',
             );
           } else if (state.exception is InvalidEmailAuthException) {
             await showErrorDialog(
-              context,
               'Please check the formatting of your email.',
             );
           } else if (state.exception is GenericAuthException) {
-            await showErrorDialog(context, 'Authentication Error');
+            await showErrorDialog('Authentication Error');
           }
         }
       },

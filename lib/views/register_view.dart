@@ -37,13 +37,13 @@ class _RegisterViewState extends State<RegisterView> {
       listener: (context, state) async {
         if (state is AuthStateRegistering) {
           if (state.exception is WeakPasswordAuthException) {
-            await showErrorDialog(context, 'Weak password');
+            await showErrorDialog('Weak password');
           } else if (state.exception is EmailAlreadyInUseAuthException) {
-            await showErrorDialog(context, 'The email is already in use');
+            await showErrorDialog('The email is already in use');
           } else if (state.exception is InvalidEmailAuthException) {
-            await showErrorDialog(context, 'Invalid email');
+            await showErrorDialog('Invalid email');
           } else if (state.exception is GenericAuthException) {
-            await showErrorDialog(context, 'Failed to Register');
+            await showErrorDialog('Failed to Register');
           }
         }
       },
