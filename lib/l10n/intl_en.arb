@@ -8,5 +8,14 @@
                 "example": "You have 3 tasks"
             }
         }
+    },
+    "archived_task_title": "{count, plural, =0{You have no tasks archived} =1{You have 1 task archived} other{You have {count} tasks archived}}",
+    "@archived_task_title": {
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "example": "You have 3 tasks archived"
+            }
+        }
     }
 }

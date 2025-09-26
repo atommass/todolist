@@ -22,4 +22,16 @@ class AppLocalizationsEn extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String archived_task_title(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'You have $count tasks archived',
+      one: 'You have 1 task archived',
+      zero: 'You have no tasks archived',
+    );
+    return '$_temp0';
+  }
 }

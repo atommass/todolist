@@ -8,5 +8,14 @@
                 "example": "Tev ir 3 uzdevumi"
             }
         }
+    },
+    "archived_task_title": "{count, plural, =0{Tukšs arhīvs} =1{Tev ir 1 arhivēts uzdevums} other{Tev ir {count} arhivēti uzdevumi}}",
+    "@archived_task_title": {
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "example": "Tev ir 3 arhivēti uzdevumi"
+            }
+        }
     }
 }

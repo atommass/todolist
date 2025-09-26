@@ -45,6 +45,14 @@ class FirebaseCloudStorage {
     }
   }
 
+  Future<void> markTaskAsUndone(String documentId) async {
+    try {
+      await todoItem.doc(documentId).update({isDoneFieldName: false});
+    } catch (e) {
+      throw CouldNotUpdateTaskException();
+    }
+  }
+
   /// Set the task's done state to [isDone].
   Future<void> setTaskDone({
     required String documentId,
@@ -67,6 +75,16 @@ class FirebaseCloudStorage {
   Stream<Iterable<CloudTask>> allTasks({required String ownerUserId}) {
     final todosCollection = todoItem
         .where(ownerUserIdFieldName, isEqualTo: ownerUserId)
+        .where(isDoneFieldName, isEqualTo: false)
+        .snapshots()
+        .map((event) => event.docs.map((doc) => CloudTask.fromSnapshot(doc)));
+    return todosCollection;
+  }
+
+  Stream<Iterable<CloudTask>> archivedTasks({required String ownerUserId}) {
+    final todosCollection = todoItem
+        .where(ownerUserIdFieldName, isEqualTo: ownerUserId)
+        .where(isDoneFieldName, isEqualTo: true)
         .snapshots()
         .map((event) => event.docs.map((doc) => CloudTask.fromSnapshot(doc)));
     return todosCollection;

@@ -5,9 +5,8 @@ import 'package:todolist/extensions/buildcontext/loc.dart';
 import 'package:todolist/services/auth/auth_service.dart';
 import 'package:todolist/services/cloud/cloud_task.dart';
 import 'package:todolist/services/cloud/firebase_cloud_storage.dart';
-import 'package:todolist/views/todolist/todo_list_view.dart';
+import 'package:todolist/views/todolist/task_inner_view.dart';
 import 'package:todolist/helpers/logout/logout_handler.dart';
-
 
 extension Count<T extends Iterable> on Stream<T> {
   Stream<int> get getLength => map((event) => event.length);
@@ -45,7 +44,7 @@ class _TaskViewState extends State<TaskView> {
             } else {
               return const Text('Loading...');
             }
-          }
+          },
         ),
         actions: [
           IconButton(
@@ -56,12 +55,21 @@ class _TaskViewState extends State<TaskView> {
           ),
           PopupMenuButton<MenuAction>(
             onSelected: (value) {
-             if (value == MenuAction.logout) {
-                handleLogout(context);
+              switch (value) {
+                case MenuAction.logout:
+                  handleLogout(context);
+                  break;
+                case MenuAction.archive:
+                  Navigator.of(context).pushNamed(archivedTaskRoute);
+                  break;
               }
             },
             itemBuilder: (context) {
-              return const [
+              return [
+                PopupMenuItem<MenuAction>(
+                  value: MenuAction.archive,
+                  child: Text('Archived Tasks'),
+                ),
                 PopupMenuItem<MenuAction>(
                   value: MenuAction.logout,
                   child: Text('Log out'),
@@ -109,5 +117,3 @@ class _TaskViewState extends State<TaskView> {
     );
   }
 }
-
-

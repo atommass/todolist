@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:todolist/services/cloud/cloud_task.dart';
 import 'package:todolist/utilities/dialogs/delete_dialog.dart';
 
-
 typedef TaskCallback = void Function(CloudTask task);
 typedef ToggleTaskCallback = Future<void> Function(CloudTask task);
 
@@ -15,7 +14,7 @@ class TaskListView extends StatelessWidget {
   const TaskListView({
     super.key,
     required this.tasks,
-    required this.onDeleteTask, 
+    required this.onDeleteTask,
     required this.onTap,
     this.onToggleDone,
   });
@@ -45,6 +44,16 @@ class TaskListView extends StatelessWidget {
             maxLines: 1,
             softWrap: true,
             overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              decoration: task.isDone
+                  ? TextDecoration.lineThrough
+                  : TextDecoration.none,
+              color: task.isDone
+                  ? Colors.grey
+                  : (task.deadline.isBefore(DateTime.now())
+                        ? Colors.red
+                        : null),
+            ),
           ),
           trailing: IconButton(
             onPressed: () async {
@@ -53,7 +62,9 @@ class TaskListView extends StatelessWidget {
                 onDeleteTask(task);
               }
             },
-            icon: Icon(Icons.delete)),
+            color: task.isDone ? Colors.grey : null,
+            icon: Icon(Icons.delete),
+          ),
         );
       },
     );

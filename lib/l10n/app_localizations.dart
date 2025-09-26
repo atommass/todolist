@@ -109,6 +109,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count, plural, =0{You have no tasks yet} =1{You have 1 task} other{You have {count} tasks}}'**
   String task_title(int count);
+
+  /// No description provided for @archived_task_title.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{You have no tasks archived} =1{You have 1 task archived} other{You have {count} tasks archived}}'**
+  String archived_task_title(int count);
 }
 
 class _AppLocalizationsDelegate

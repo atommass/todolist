@@ -7,7 +7,6 @@ import 'package:intl/intl.dart';
 import 'package:todolist/utilities/dialogs/cannot_share_empty_todoitem_dialog.dart';
 import 'package:todolist/utilities/generics/get_arguments.dart';
 
-
 class CreateUpdateTaskView extends StatefulWidget {
   const CreateUpdateTaskView({super.key});
 
@@ -96,12 +95,11 @@ class _CreateUpdateTaskViewState extends State<CreateUpdateTaskView> {
               if (_task == null || text.isEmpty) {
                 await showCannotShareEmptyToDoItemDialog(context);
               }
-              SharePlus.instance.share(
-                ShareParams(text: text)
-              );
-            }, 
-            icon: const Icon(Icons.share))
-          ],
+              SharePlus.instance.share(ShareParams(text: text));
+            },
+            icon: const Icon(Icons.share),
+          ),
+        ],
       ),
       body: FutureBuilder(
         future: createOrGetExistingTask(context),
@@ -122,12 +120,22 @@ class _CreateUpdateTaskViewState extends State<CreateUpdateTaskView> {
                           Expanded(
                             child: Text(
                               _task != null
-                                  ? DateFormat.yMMMd().format(_task!.deadline.toLocal())
+                                  ? DateFormat.yMMMd().format(
+                                      _task!.deadline.toLocal(),
+                                    )
                                   : 'No deadline',
                               overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: _task != null &&
+                                        _task!.deadline.isBefore(DateTime.now())
+                                    ? Colors.red
+                                    : null,
+                              ),
                             ),
                           ),
                           TextButton(
+                            // TODO: implement that date changes as soon as the user selects a new date
                             onPressed: () async {
                               final initial = _task?.deadline ?? DateTime.now();
                               final newDate = await showDatePicker(
@@ -171,39 +179,20 @@ class _CreateUpdateTaskViewState extends State<CreateUpdateTaskView> {
                       ElevatedButton(
                         onPressed: () {
                           if (_task != null) {
-                            _taskService.markTaskAsDone(_task!.documentId);
+                            if (_task!.isDone) {
+                              _taskService.markTaskAsUndone(_task!.documentId);
+                            } else {
+                              _taskService.markTaskAsDone(_task!.documentId);
+                            }
                             Navigator.of(context).pop();
                           }
                         },
-                        child: const Text('Mark as Done'),
+                        child: Text(
+                          _task != null && _task!.isDone
+                              ? 'Mark as Undone'
+                              : 'Mark as Done',
+                        ),
                       ),
-                      // TODO: implement priority selection
-                      // TODO: implement that elevated button switches to "Mark as Undone" if the task is done
-                      // TODO: implement that the text field has a line through if the task is done
-                      // TODO: implement that the deadline date is red if the deadline is in the past
-                      // TODO: implement that the deadline date is orange if the deadline is today
-                      // TODO: implement that the deadline date is green if the deadline is in the future
-                      // TODO: implement that the priority is red if the priority is high
-                      // TODO: implement that the priority is orange if the priority is medium
-                      // TODO: implement that the priority is green if the priority is low
-                      // TODO: implement that the priority is grey if the priority is none
-                      // TODO: implement that the priority is a dropdown button with the options: None, Low, Medium, High
-                      // TODO: implement that the priority is saved to the database
-                      // TODO: implement that the priority is loaded from the database
-                      // TODO: implement that the priority shows up as a colored dot next to the task in the task list
-                      // TODO: implement that date changes as soon as the user selects a new date
-                      // TODO: implement that the priority changes as soon as the user selects a new priority
-                      // TODO: implement task notifications
-                      // TODO: implement task categories
-                      // TODO: implement task tags
-                      // TODO: implement task comments
-                      // TODO: implement task attachments
-                      // TODO: implement task archiving
-                      // TODO: implement task filtering
-                      // TODO: implement task search
-                      // TODO: implement task sorting
-                      // TODO: implement Google Calendar integration
-                      // TODO: implement Google & Facebook login
                     ],
                   ),
                 );

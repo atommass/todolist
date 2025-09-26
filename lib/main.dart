@@ -7,10 +7,11 @@ import 'package:todolist/services/auth/bloc/auth_bloc.dart';
 import 'package:todolist/services/auth/bloc/auth_event.dart';
 import 'package:todolist/services/auth/bloc/auth_state.dart';
 import 'package:todolist/services/auth/firebase_auth_provider.dart';
+import 'package:todolist/views/archive_view/archived_task_view.dart';
 import 'package:todolist/views/login_view.dart';
 import 'package:todolist/views/todolist/create_update_todo_view.dart';
 import 'package:todolist/views/todolist/forgot_password_view.dart';
-import 'package:todolist/views/todolist/todolist_view.dart';
+import 'package:todolist/views/todolist/current_task_view.dart';
 import 'package:todolist/views/register_view.dart';
 import 'package:todolist/views/verify_email_view.dart';
 
@@ -23,7 +24,7 @@ void main() {
     MaterialApp(
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
-      title: 'Flutter Demo',
+      title: 'To-Do List',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
@@ -34,6 +35,7 @@ void main() {
       ),
       routes: {
         createUpdateTaskRoute: (context) => const CreateUpdateTaskView(),
+        archivedTaskRoute: (context) => const ArchivedTaskView(),
       },
     ),
   );

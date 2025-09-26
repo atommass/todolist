@@ -22,4 +22,16 @@ class AppLocalizationsLv extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String archived_task_title(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Tev ir $count arhivēti uzdevumi',
+      one: 'Tev ir 1 arhivēts uzdevums',
+      zero: 'Tukšs arhīvs',
+    );
+    return '$_temp0';
+  }
 }
