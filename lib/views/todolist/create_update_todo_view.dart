@@ -18,6 +18,8 @@ class _CreateUpdateTaskViewState extends State<CreateUpdateTaskView> {
   CloudTask? _task;
   late final FirebaseCloudStorage _taskService;
   late final TextEditingController _textController;
+  // track priority as int consistent with CloudTask.priority
+  int _selectedPriorityInt = 0;
 
   @override
   void initState() {
@@ -46,6 +48,8 @@ class _CreateUpdateTaskViewState extends State<CreateUpdateTaskView> {
     if (widgetTask != null) {
       _task = widgetTask;
       _textController.text = widgetTask.text;
+      // initialize selected priority from the incoming task
+      _selectedPriorityInt = widgetTask.priority;
       return widgetTask;
     }
 
@@ -57,6 +61,7 @@ class _CreateUpdateTaskViewState extends State<CreateUpdateTaskView> {
     final userId = currentUser.id;
     final newTask = await _taskService.createNewTask(ownerUserId: userId);
     _task = newTask;
+    _selectedPriorityInt = newTask.priority;
     return newTask;
   }
 
@@ -85,6 +90,7 @@ class _CreateUpdateTaskViewState extends State<CreateUpdateTaskView> {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> items = <String>['None', 'Low', 'Medium', 'High'];
     return Scaffold(
       appBar: AppBar(
         title: const Text('Task'),
@@ -127,7 +133,8 @@ class _CreateUpdateTaskViewState extends State<CreateUpdateTaskView> {
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: _task != null &&
+                                color:
+                                    _task != null &&
                                         _task!.deadline.isBefore(DateTime.now())
                                     ? Colors.red
                                     : null,
@@ -175,7 +182,94 @@ class _CreateUpdateTaskViewState extends State<CreateUpdateTaskView> {
                           hintText: 'What do you want to do?',
                         ),
                       ),
-                      const SizedBox(height: 16.0),
+                      const SizedBox(height: 32.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            'Priority:',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              // Implement priority change logic here
+                              // noop - handled by DropdownButton onChanged
+                            },
+                            child: DropdownButton<int>(
+                              value: _selectedPriorityInt,
+                              icon: const Icon(Icons.arrow_downward),
+                              elevation: 16,
+                              style: const TextStyle(fontSize: 16),
+                              underline: Container(
+                                height: 2,
+                                color: Colors.transparent,
+                              ),
+                              items: items.asMap().entries.map((entry) {
+                                final index = entry.key; // 0..3
+                                final label = entry.value;
+                                // color the text according to priority
+                                Color textColor = Colors.grey;
+                                if (index == 1) textColor = Colors.green;
+                                if (index == 2) textColor = Colors.orange;
+                                if (index == 3) textColor = Colors.red;
+                                return DropdownMenuItem<int>(
+                                  value: index,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 10,
+                                        height: 10,
+                                        margin: const EdgeInsets.only(
+                                          right: 8.0,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: textColor,
+                                          shape: BoxShape.circle,
+                                        ),
+                                      ),
+                                      Text(
+                                        label,
+                                        style: TextStyle(color: textColor),
+                                      ),
+                                      const SizedBox(width: 16.0),
+                                    ],
+                                  ),
+                                );
+                              }).toList(),
+                              onChanged: (int? newValue) async {
+                                if (newValue == null) return;
+                                final item = _task;
+                                setState(() {
+                                  _selectedPriorityInt = newValue;
+                                });
+                                // persist change to backend and update local task
+                                if (item != null) {
+                                  await _taskService.updateTaskPriority(
+                                    documentId: item.documentId,
+                                    priority: newValue,
+                                  );
+                                  setState(() {
+                                    final t = item;
+                                    _task = CloudTask(
+                                      documentId: t.documentId,
+                                      ownerUserId: t.ownerUserId,
+                                      text: t.text,
+                                      isDone: t.isDone,
+                                      lastUpdated: DateTime.now(),
+                                      deadline: t.deadline,
+                                      priority: newValue,
+                                    );
+                                  });
+                                }
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 32.0),
                       ElevatedButton(
                         onPressed: () {
                           if (_task != null) {

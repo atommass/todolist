@@ -72,6 +72,17 @@ class FirebaseCloudStorage {
     return setOrUpdateTaskDeadline(documentId: documentId, deadline: deadline);
   }
 
+  Future<void> updateTaskPriority({
+    required String documentId,
+    required int priority,
+  }) async {
+    try {
+      await todoItem.doc(documentId).update({priorityFieldName: priority});
+    } catch (e) {
+      throw CouldNotUpdateTaskException();
+    }
+  }
+
   Stream<Iterable<CloudTask>> allTasks({required String ownerUserId}) {
     final todosCollection = todoItem
         .where(ownerUserIdFieldName, isEqualTo: ownerUserId)
