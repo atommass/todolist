@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart' show ReadContext;
 import 'package:todolist/constants/routes.dart';
 import 'package:todolist/enums/menu_action.dart';
 import 'package:todolist/extensions/buildcontext/loc.dart';
 import 'package:todolist/services/auth/auth_service.dart';
-import 'package:todolist/services/auth/bloc/auth_bloc.dart';
-import 'package:todolist/services/auth/bloc/auth_event.dart';
 import 'package:todolist/services/cloud/cloud_task.dart';
 import 'package:todolist/services/cloud/firebase_cloud_storage.dart';
-import 'package:todolist/utilities/dialogs/logout_dialog.dart';
 import 'package:todolist/views/todolist/todo_list_view.dart';
+import 'package:todolist/helpers/logout/logout_handler.dart';
 
 
 extension Count<T extends Iterable> on Stream<T> {
@@ -58,13 +55,9 @@ class _TaskViewState extends State<TaskView> {
             icon: const Icon(Icons.add),
           ),
           PopupMenuButton<MenuAction>(
-            onSelected: (value) async {
-              switch (value) {
-                case MenuAction.logout:
-                  final shouldLogout = await showLogOutDialog(context);
-                  if (shouldLogout) {
-                    context.read<AuthBloc>().add(AuthEventLogOut());
-                  }
+            onSelected: (value) {
+             if (value == MenuAction.logout) {
+                handleLogout(context);
               }
             },
             itemBuilder: (context) {
@@ -116,3 +109,5 @@ class _TaskViewState extends State<TaskView> {
     );
   }
 }
+
+
