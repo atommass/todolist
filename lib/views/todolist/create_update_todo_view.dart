@@ -142,7 +142,6 @@ class _CreateUpdateTaskViewState extends State<CreateUpdateTaskView> {
                             ),
                           ),
                           TextButton(
-                            // TODO: implement that date changes as soon as the user selects a new date
                             onPressed: () async {
                               final initial = _task?.deadline ?? DateTime.now();
                               final newDate = await showDatePicker(
