@@ -1,0 +1,26 @@
+// Medium priority:
+    // TODO: implement priority selection
+                  // TODO: implement that the priority is red if the priority is high
+                  // TODO: implement that the priority is orange if the priority is medium
+                  // TODO: implement that the priority is green if the priority is low
+                  // TODO: implement that the priority is grey if the priority is none
+                  // TODO: implement that the priority is a dropdown button with the options: None, Low, Medium, High
+                  // TODO: implement that the priority shows up as a colored dot next to the task in the task list
+                  // TODO: implement that the priority changes as soon as the user selects a new priority
+
+  
+  // Other features:
+    // TODO: implement task notifications
+    // TODO: implement task categories
+    // TODO: implement task tags
+    // TODO: implement task comments
+    // TODO: implement task attachments
+  
+  // Data handling and UI improvements
+    // TODO: implement task filtering
+    // TODO: implement task search
+    // TODO: implement task sorting
+
+  // Integrations:
+    // TODO: implement Google Calendar integration
+    // TODO: implement Google & Facebook login
